@@ -1,0 +1,21 @@
+{
+  "name": "cypressautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "specificTest": "npx cypress run --spec cypress/integration/examples/Iframe.js --record --key 19e18d91-a2a1-4160-ba39-bf9a35996cd9 --browser chrome",
+    "allTests": "cypress run --browser chrome",
+    "headTest" : "npm run allTests -- --headed",
+    "allTestsDashboardRecord": "npm run allTests -- --record --key 19e18d91-a2a1-4160-ba39-bf9a35996cd9",
+    "GreenKartTest" : "npm run allTests -- --spec \"cypress/integration/examples/**/*\""
+
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.10.0",
+    "cypress-iframe": "^1.0.1",
+    "mochawesome": "^7.1.3"
+  }
+}

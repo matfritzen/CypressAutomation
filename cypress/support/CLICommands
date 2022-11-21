@@ -1,0 +1,20 @@
+To run all the tests:   npx cypress run
+
+To run a specific test:   npx cypress run --spec cypress/integration/examples/testname.js
+
+To set the environment: npx cypress run --env url="environment url"
+
+To disable the headless mode: npx cypress run --headed
+
+To setup the browser that the tests will run: npx cypress run --browser chrome
+
+To setup with the Cypress Dashboard key: npx cypress run --record --key 19e18d91-a2a1-4160-ba39-bf9a35996cd9 
+
+
+
+
+
+// INSTALLING MOCHA AWESOME REPORT
+
+
+Install Mocha Awesome report: npm install --save-dev mochawesome
