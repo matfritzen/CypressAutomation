@@ -2,6 +2,10 @@ To run all the tests:   npx cypress run
 
 To run a specific test:   npx cypress run --spec cypress/integration/examples/testname.js
 
+To run a specific folder: npx cypress run --spec "/Users/matheusfritzen/AutomationProjects/CypressAutomation/cypress/integration/GreenKart/*.js"
+
+// Always remember to check the specPattern property in the cypress.config.js file, there will be configured the folder and the type of the file that will be executed as test. (.js, or .feature, or .spec.js)
+
 To set the environment: npx cypress run --env url="environment url"
 
 To disable the headless mode: npx cypress run --headed
@@ -18,3 +22,27 @@ To setup with the Cypress Dashboard key: npx cypress run --record --key 19e18d91
 
 
 Install Mocha Awesome report: npm install --save-dev mochawesome
+
+
+// INSTALLING CUCUMBER
+
+Install Cucumber plugin: npm install --save-dev cypress-cucumber-preprocessor  
+https://www.npmjs.com/package/cypress-cucumber-preprocessor
+
+Install Cucumber(Gherkin) Full Support through VS Code Marketplace - You can search the plugin name on google and through there it will redirect you to install the plugin in VS code Marketplace.
+
+Running all feature files : npx cypress run --spec /Users/matheusfritzen/AutomationProjects/CypressAutomation/cypress/integration/examples/BDD/*.feature --headed --browser chrome
+
+Running a specific feature files : npx cypress run --spec /Users/matheusfritzen/AutomationProjects/CypressAutomation/cypress/integration/examples/BDD/ecommerce.feature --headed --browser chrome
+
+Running tests according to the tags of each scenario: npx cypress-tags run -e TAGS="@Smoke" --browser chrome
+
+Installing plugin to generate a report based on the json file generated in the cucumber-json folder: npm install multiple-cucumber-html-reporter --save-dev  
+
+https://github.com/wswebcreation/multiple-cucumber-html-reporter
+
+The property cypress-cucumber-preprocessor should have the cucumberJson property and its properties on it, so that the output folder will be configured and the json file will be generated with the results of the execution.
+
+Create a JS file (cucumber-html-report.js) with the details of the output. Pay attention in the jsonDir property, is where your cucumber.json file will be stored, and also pay attention to the reportPath property that is where the html file will be generated.
+
+Run the JS file to get the HTML report of the cucumber execution: node cucumber-html-report.js

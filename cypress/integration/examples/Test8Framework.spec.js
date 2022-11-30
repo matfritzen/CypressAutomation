@@ -2,6 +2,7 @@
 
 import HomePage from "../../pageObjects/HomePage";
 import ProductPage from "../../pageObjects/ProductPage";
+import CheckoutPage from "../../pageObjects/CheckoutPage";
 
 describe('My Eighth Test Suite', function()
 {
@@ -19,6 +20,7 @@ describe('My Eighth Test Suite', function()
         
         const homePage = new HomePage();
         const productPage = new ProductPage();
+        const checkoutPage = new CheckoutPage();
 
         cy.visit(Cypress.env('url') + "/angularpractice/");
         homePage.getEditBox().type(this.data.name);
@@ -38,7 +40,7 @@ describe('My Eighth Test Suite', function()
         productPage.checkoutButton().click();
         var sum = 0;
 
-        cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
+        checkoutPage.productTotal().each(($el, index, $list) => {
 
             const amount = $el.text();
             var value = amount.split(" ")
@@ -49,7 +51,7 @@ describe('My Eighth Test Suite', function()
 
             cy.log(sum);
 
-            cy.get(".text-right h3 strong").each((element) => {
+            checkoutPage.checkoutTotal().each((element) => {
 
                 const totalValue = element.text();
                 var total = totalValue.split(" ");
@@ -59,14 +61,13 @@ describe('My Eighth Test Suite', function()
             })
         })
 
-        cy.contains('Checkout').click();
-        cy.get('#country').type('India');
-        cy.get('.suggestions > ul > li > a').click();
+        checkoutPage.clickCheckoutButton();
+        checkoutPage.selectCountry("India");
         Cypress.config('defaultCommandTimeout', 10000); // Configuration for a specific spec file
-        cy.get('#checkbox2').click({force:true});
-        cy.get('input[type="submit"]').click();
+        checkoutPage.checkCheckboxAgreeTermsAndConditions();
+        checkoutPage.clickPurchaseButton();
         // cy.get('.alert').should('have.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
-        cy.get('.alert').then(function(element){
+        checkoutPage.alertMessage().then(function(element){
 
             const actualText = element.text();
             expect(actualText.includes("Success")).to.be.true
